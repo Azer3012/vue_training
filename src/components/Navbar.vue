@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <a href="#" class="navbar-brand">My Vue</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li v-for="(page, index) in pages" :key="index" class="nav-item">
+        <li v-for="(page, index) in publishedPage" :key="index" class="nav-item">
           <navbar-link
             :page="page"
             :isActive="activePage === index"
@@ -31,6 +31,13 @@ export default {
   props: ["pages", "activePage", "navLinkClick"],
   created() {
     this.getThemeSettings();
+  },
+
+  computed:{
+    publishedPage(){
+      
+      return this.pages.filter(page=>page.published)
+    }
   },
 
   data() {

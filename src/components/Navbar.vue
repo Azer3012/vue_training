@@ -5,14 +5,16 @@
     <div class="container-fluid">
       <a href="#" class="navbar-brand">My Vue</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li v-for="(page, index) in publishedPage" :key="index" class="nav-item">
+       
           <navbar-link
+          v-for="(page, index) in publishedPage" :key="index" class="nav-item"
             :page="page"
             :isActive="activePage === index"
-            @click.prevent="navLinkClick(index)"
+            :index="index"
+            @actived="$emit('actived')"
           >
           </navbar-link>
-        </li>
+        
       </ul>
       <form class="d-flex">
         <button class="btn btn-primary" @click.prevent="changeTheme()">
@@ -28,7 +30,7 @@ export default {
   components: {
     NavbarLink,
   },
-  props: ["pages", "activePage", "navLinkClick"],
+  props: ["pages", "activePage"],
   created() {
     this.getThemeSettings();
   },
